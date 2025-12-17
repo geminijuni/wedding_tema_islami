@@ -9,20 +9,20 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Poppins,sans-serif;background:#fafafa;color:#333;user-select:none}
-section{padding:70px 20px}
+body{font-family:Poppins,sans-serif;background:#fafafa;color:#333}
+section{padding:80px 20px}
 .center{text-align:center}
 h2{font-size:28px;margin-bottom:15px}
 :root{--gold:#C9A24D}
 
-/* ANIMASI */
-.fade{opacity:0;transform:translateY(20px);transition:1s}
+/* ================= ANIMASI UMUM ================= */
+.fade{opacity:0;transform:translateY(25px);transition:1s}
 .fade.show{opacity:1;transform:none}
 
-/* OPENING */
+/* ================= OPENING ================= */
 .opening{
   position:fixed;inset:0;
-  background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+  background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
   url("foto1.jpg") center/cover;
   display:flex;align-items:center;justify-content:center;
   z-index:3000
@@ -33,171 +33,139 @@ h2{font-size:28px;margin-bottom:15px}
   max-width:360px;text-align:center;
   box-shadow:0 25px 60px rgba(0,0,0,.35)
 }
-.bismillah{
-  font-family:'Scheherazade New',serif;
-  font-size:22px;margin-bottom:8px
-}
-.opening-box h1{
-  font-family:'Scheherazade New',serif;
-  font-size:34px;margin:8px 0
-}
+.bismillah{font-family:'Scheherazade New',serif;font-size:22px}
+.opening-box h1{font-family:'Scheherazade New',serif;font-size:34px}
 .opening-box button{
   margin-top:20px;padding:14px 32px;
   border:none;border-radius:30px;
-  background:var(--gold);color:#fff;
-  font-size:15px;cursor:pointer
+  background:var(--gold);color:#fff;cursor:pointer
 }
 
-/* COVER */
+/* ================= COVER ================= */
 .cover{
   min-height:100vh;
   background:url("foto5.jpg") center/cover no-repeat;
   display:flex;align-items:center;justify-content:center;
-  position:relative
+  position:relative;overflow:hidden
 }
 .cover::before{
   content:"";position:absolute;inset:0;
-  background:rgba(0,0,0,.5)
-}
-.cover h1{
-  position:relative;
-  font-family:'Scheherazade New',serif;
-  font-size:72px;color:#fff;z-index:1
+  background:rgba(0,0,0,.6)
 }
 
-/* MEMPELAI (GABUNG 1 & 2) */
-.pengantin{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  max-width:900px;
-  margin:auto
+/* ORNAMEN ISLAMI */
+.ornament{
+  position:absolute;width:120px;height:120px;
+  background:url("ornamen.png") center/contain no-repeat;
+  opacity:.25;animation:float 6s ease-in-out infinite
 }
+.o1{top:10%;left:5%}
+.o2{bottom:15%;right:8%;animation-delay:2s}
+.o3{top:20%;right:15%;animation-delay:4s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+
+/* NAMA COVER (ANIMASI ULANG) */
+.cover-nama{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px}
+.cover-nama h1,.cover-nama span{opacity:0}
+.cover-nama.show .atas{animation:down 1s forwards}
+.cover-nama.show .tengah{animation:fade 1s forwards .7s}
+.cover-nama.show .bawah{animation:up 1s forwards 1.4s}
+
+.cover-nama h1{font-family:'Scheherazade New',serif;font-size:72px;color:#fff}
+.cover-nama span{font-size:26px;color:var(--gold)}
+
+@keyframes down{from{opacity:0;transform:translateY(-40px)}to{opacity:1}}
+@keyframes up{from{opacity:0;transform:translateY(40px)}to{opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+@media(max-width:600px){.cover-nama h1{font-size:54px}}
+
+/* ================= MEMPELAI ================= */
+.pengantin{display:flex;justify-content:center;gap:20px;max-width:900px;margin:auto}
 .card{
-  width:260px;
-  background:#fff;
-  padding:30px;
-  border-radius:26px;
+  width:260px;background:#fff;padding:30px;border-radius:26px;
   box-shadow:0 12px 30px rgba(0,0,0,.12);
-  opacity:0;
-  transform:translateY(40px) scale(.95);
-  transition:.8s
+  opacity:0;transform:translateY(40px) scale(.95);transition:.8s
 }
 .card.show{opacity:1;transform:none}
 .photo{
-  width:140px;height:140px;
-  margin:0 auto 15px;
-  border-radius:50%;overflow:hidden;
-  border:4px solid var(--gold)
+  width:140px;height:140px;margin:0 auto 15px;
+  border-radius:50%;overflow:hidden;border:4px solid var(--gold)
 }
 .photo img{width:100%;height:100%;object-fit:cover}
 
-/* HP: tetap berdampingan + bisa swipe */
 @media(max-width:600px){
-  .pengantin{
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    justify-content:flex-start;
-    padding-bottom:10px;
-  }
-  .card{
-    flex:0 0 260px;
-    scroll-snap-align:center;
-  }
+  .pengantin{overflow-x:auto;scroll-snap-type:x mandatory}
+  .card{flex:0 0 260px;scroll-snap-align:center}
 }
 
-/* AYAT */
-.ayat{
-  font-family:'Scheherazade New',serif;
-  font-size:28px;color:var(--gold)
-}
-.arti{
-  font-size:14px;color:#555;
-  max-width:700px;margin:15px auto
-}
+/* ================= AYAT ================= */
+.ayat{font-family:'Scheherazade New',serif;font-size:28px;color:var(--gold)}
+.arti{font-size:14px;color:#555;max-width:700px;margin:15px auto}
+.ayat-nama{font-size:13px;color:#888}
 
-/* COUNTDOWN */
-.countdown{
-  display:flex;justify-content:center;
-  gap:15px;margin-top:25px
-}
+/* ================= COUNTDOWN ================= */
+.countdown{display:flex;justify-content:center;gap:15px}
 .time{
-  background:#fff;padding:15px 18px;
-  border-radius:16px;
+  background:#fff;padding:15px 18px;border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,.12)
 }
 .time h3{font-size:22px;color:var(--gold)}
 .time span{font-size:12px}
 
-/* MAP */
+/* ================= MAP ================= */
 .maps-box{
-  max-width:900px;margin:20px auto;
-  border-radius:24px;overflow:hidden;
-  box-shadow:0 15px 40px rgba(0,0,0,.15)
+  max-width:900px;margin:20px auto;border-radius:24px;
+  overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.15)
 }
 .maps-box iframe{width:100%;height:350px;border:0}
 .btn-maps{
-  display:inline-block;margin-top:20px;
-  padding:14px 26px;background:var(--gold);
-  color:#fff;border-radius:30px;
-  text-decoration:none
+  display:inline-block;margin-top:20px;padding:14px 26px;
+  background:var(--gold);color:#fff;border-radius:30px;text-decoration:none
 }
 
-/* RSVP */
+/* ================= RSVP ================= */
 .rsvp-box{
-  max-width:500px;margin:auto;
-  background:#fff;padding:30px;
-  border-radius:24px;
+  max-width:500px;margin:auto;background:#fff;
+  padding:30px;border-radius:24px;
   box-shadow:0 12px 30px rgba(0,0,0,.12)
 }
 .rsvp-box input{
-  width:100%;padding:14px;
-  border-radius:14px;
-  border:1px solid #ddd;
-  margin-bottom:15px
+  width:100%;padding:14px;border-radius:14px;
+  border:1px solid #ddd;margin-bottom:15px
 }
 .rsvp-box button{
-  width:100%;padding:14px;
-  border:none;border-radius:30px;
-  background:var(--gold);color:#fff
+  width:100%;padding:14px;border:none;
+  border-radius:30px;background:var(--gold);color:#fff
 }
 
-/* GALERI */
+/* ================= GALERI ================= */
 .galeri{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
   gap:15px;max-width:900px;margin:auto
 }
-.galeri img{
-  width:100%;border-radius:18px;
-  cursor:pointer;transition:.3s
-}
-.galeri img:hover{transform:scale(1.05)}
-
+.galeri img{width:100%;border-radius:18px;cursor:pointer}
 #lightbox{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.85);
-  display:none;align-items:center;
-  justify-content:center;z-index:4000
+  position:fixed;inset:0;background:rgba(0,0,0,.85);
+  display:none;align-items:center;justify-content:center;z-index:4000
 }
 #lightbox img{max-width:90%;max-height:90%;border-radius:20px}
 
-/* MUSIC */
+/* ================= MUSIC + WATERMARK ================= */
 #musicBtn{
   position:fixed;bottom:25px;right:25px;
-  width:52px;height:52px;border:none;
-  border-radius:50%;background:var(--gold);
-  color:#fff;font-size:20px;z-index:999
+  width:52px;height:52px;border:none;border-radius:50%;
+  background:var(--gold);color:#fff;font-size:20px;z-index:999
 }
-
-/* WATERMARK */
 #watermark{
-  position:fixed;inset:0;
-  display:none;
+  position:fixed;inset:0;display:none;
   align-items:center;justify-content:center;
   font-size:32px;color:rgba(0,0,0,.2);
-  pointer-events:none;z-index:5000;
-  text-align:center;white-space:pre-line
+  pointer-events:none;z-index:5000;white-space:pre-line;text-align:center
 }
 
 footer{text-align:center;font-size:12px;color:#aaa;padding:30px}
@@ -217,133 +185,138 @@ footer{text-align:center;font-size:12px;color:#aaa;padding:30px}
   </div>
 </div>
 
-<section class="cover center">
-  <h1>Ahmad & Aisyah</h1>
-</section>
-
-<section class="center fade">
-  <h2>Mempelai</h2>
-  <div class="pengantin">
-    <div class="card">
-      <div class="photo"><img src="foto1.jpg"></div>
-      <h3>Ahmad</h3>
-      <p>Putra Bpk. ... & Ibu ...</p>
-    </div>
-    <div class="card">
-      <div class="photo"><img src="foto2.jpg"></div>
-      <h3>Aisyah</h3>
-      <p>Putri Bpk. ... & Ibu ...</p>
-    </div>
+<!-- COVER -->
+<section class="cover">
+  <div class="ornament o1"></div>
+  <div class="ornament o2"></div>
+  <div class="ornament o3"></div>
+  <div class="cover-nama">
+    <h1 class="atas">Ahmad</h1>
+    <span class="tengah">&</span>
+    <h1 class="bawah">Aisyah</h1>
   </div>
 </section>
 
+<!-- MEMPELAI -->
 <section class="center fade">
-  <div class="ayat">وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًۭا</div>
-  <div class="arti">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan hidup…” (QS. Ar-Rum: 21)</div>
+<h2>Mempelai</h2>
+<div class="pengantin">
+  <div class="card">
+    <div class="photo"><img src="foto1.jpg"></div>
+    <h3>Ahmad</h3><p>Putra Bpk. ... & Ibu ...</p>
+  </div>
+  <div class="card">
+    <div class="photo"><img src="foto2.jpg"></div>
+    <h3>Aisyah</h3><p>Putri Bpk. ... & Ibu ...</p>
+  </div>
+</div>
 </section>
 
+<!-- AYAT -->
 <section class="center fade">
-  <h2>Menuju Hari Bahagia</h2>
-  <div class="countdown">
-    <div class="time"><h3 id="d">0</h3><span>Hari</span></div>
-    <div class="time"><h3 id="h">0</h3><span>Jam</span></div>
-    <div class="time"><h3 id="m">0</h3><span>Menit</span></div>
-    <div class="time"><h3 id="s">0</h3><span>Detik</span></div>
-  </div>
+  <div class="ayat">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا</div>
+  <div class="arti">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan hidup…”</div>
+  <div class="ayat-nama">QS. Ar-Rum : 21</div>
 </section>
 
+<!-- COUNTDOWN -->
 <section class="center fade">
-  <h2>Lokasi Acara</h2>
-  <p>Gedung Serbaguna Al-Hikmah</p>
-  <div class="maps-box">
-    <iframe src="https://www.google.com/maps?q=-6.2,106.8166&output=embed"></iframe>
-  </div>
-  <a class="btn-maps" target="_blank" href="https://maps.google.com/?q=-6.2,106.8166">📍 Buka Google Maps</a>
+<h2>Menuju Hari Bahagia</h2>
+<div class="countdown">
+  <div class="time"><h3 id="d">0</h3><span>Hari</span></div>
+  <div class="time"><h3 id="h">0</h3><span>Jam</span></div>
+  <div class="time"><h3 id="m">0</h3><span>Menit</span></div>
+  <div class="time"><h3 id="s">0</h3><span>Detik</span></div>
+</div>
 </section>
 
+<!-- MAP -->
 <section class="center fade">
-  <h2>Konfirmasi Kehadiran</h2>
-  <div class="rsvp-box">
-    <input id="nama" placeholder="Nama Anda">
-    <button onclick="rsvp()">📨 Kirim RSVP</button>
-  </div>
+<h2>Lokasi Acara</h2>
+<div class="maps-box">
+<iframe src="https://www.google.com/maps?q=-6.2,106.8166&output=embed"></iframe>
+</div>
+<a class="btn-maps" target="_blank" href="https://maps.google.com/?q=-6.2,106.8166">📍 Buka Google Maps</a>
 </section>
 
+<!-- RSVP -->
 <section class="center fade">
-  <h2>Galeri</h2>
-  <div class="galeri">
-    <img src="foto1.jpg" onclick="openImg(this)">
-    <img src="foto2.jpg" onclick="openImg(this)">
-    <img src="foto3.jpg" onclick="openImg(this)">
-    <img src="foto4.jpg" onclick="openImg(this)">
-  </div>
+<h2>Konfirmasi Kehadiran</h2>
+<div class="rsvp-box">
+<input id="nama" placeholder="Nama Anda">
+<button onclick="rsvp()">📨 Kirim RSVP</button>
+</div>
+</section>
+
+<!-- GALERI -->
+<section class="center fade">
+<h2>Galeri</h2>
+<div class="galeri">
+<img src="foto1.jpg" onclick="openImg(this)">
+<img src="foto2.jpg" onclick="openImg(this)">
+<img src="foto3.jpg" onclick="openImg(this)">
+<img src="foto4.jpg" onclick="openImg(this)">
+</div>
 </section>
 
 <div id="lightbox" onclick="this.style.display='none'">
-  <img id="lightbox-img">
+<img id="lightbox-img">
 </div>
 
 <div id="watermark">DEMO UNDANGAN DIGITAL
 © Halmi Invitation</div>
 
-<audio id="music" loop>
-  <source src="music.mp3">
-</audio>
+<audio id="music" loop><source src="music.mp3"></audio>
 <button id="musicBtn">🔊</button>
 
-<footer>© 2025 Undangan Digital Islami</footer>
+<footer>©085811927625</footer>
 
 <script>
-/* URL PARAM */
 const p=new URLSearchParams(location.search);
 if(p.get("to"))guest.innerText=p.get("to");
 if(p.get("watermark")==="true")watermark.style.display="flex";
 
-/* OPEN */
 function buka(){
-  opening.classList.add("opened");
-  setTimeout(()=>opening.remove(),1000);
-  music.play();
+opening.classList.add("opened");
+setTimeout(()=>opening.remove(),1000);
+music.play();
 }
 
-/* FADE */
 const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>x.isIntersecting&&x.target.classList.add('show'));
-},{threshold:.3});
-document.querySelectorAll('.fade,.card').forEach(el=>obs.observe(el));
+e.forEach(x=>{
+if(x.isIntersecting)x.target.classList.add('show');
+else x.target.classList.remove('show');
+})
+},{threshold:.4});
+document.querySelectorAll('.fade,.card,.cover-nama').forEach(el=>obs.observe(el));
 
-/* COUNTDOWN */
 const target=new Date("2025-12-30 08:00").getTime();
 setInterval(()=>{
-  let t=target-new Date().getTime();
-  if(t<0)return;
-  d.innerText=Math.floor(t/86400000);
-  h.innerText=Math.floor(t/3600000)%24;
-  m.innerText=Math.floor(t/60000)%60;
-  s.innerText=Math.floor(t/1000)%60;
+let t=target-new Date().getTime();
+if(t<0)return;
+d.innerText=Math.floor(t/86400000);
+h.innerText=Math.floor(t/3600000)%24;
+m.innerText=Math.floor(t/60000)%60;
+s.innerText=Math.floor(t/1000)%60;
 },1000);
 
-/* RSVP */
 function rsvp(){
-  if(!nama.value)return alert("Isi nama dulu");
-  location.href=`https://wa.me/628xxxxxxxxxx?text=Assalamu'alaikum,%20saya%20${nama.value}%20akan%20hadir`;
+if(!nama.value)return alert("Isi nama dulu");
+location.href=`https://wa.me/628xxxxxxxxxx?text=Assalamu'alaikum,%20saya%20${nama.value}%20akan%20hadir`;
 }
 
-/* LIGHTBOX */
 function openImg(el){
-  lightbox.style.display="flex";
-  document.getElementById("lightbox-img").src=el.src;
+lightbox.style.display="flex";
+document.getElementById("lightbox-img").src=el.src;
 }
 
-/* MUSIC */
 musicBtn.onclick=()=>{
-  music.paused?(music.play(),musicBtn.textContent="🔊"):(music.pause(),musicBtn.textContent="🔇");
+music.paused?(music.play(),musicBtn.textContent="🔊"):(music.pause(),musicBtn.textContent="🔇");
 }
 
-/* PROTEKSI */
 document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("keydown",e=>{
-  if(e.keyCode===123||e.ctrlKey)e.preventDefault();
+if(e.keyCode===123||e.ctrlKey)e.preventDefault();
 });
 </script>
 
